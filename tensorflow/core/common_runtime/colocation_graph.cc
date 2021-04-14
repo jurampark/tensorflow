@@ -1232,6 +1232,11 @@ Status ColocationGraph::GetDevicesForNode(
             gpu_msg =
                 " [jurampark] The requested device appears to be a GPU, but CUDA is not "
                 "enabled.";
+#if GOOGLE_CUDA
+            gpu_msg += " GOOGLE_CUDE also defined.";
+#else
+            gpu_msg += " GOOGLE_CUDE is not defined.";
+#endif
           }
 
           return errors::InvalidArgument(
