@@ -1230,12 +1230,16 @@ Status ColocationGraph::GetDevicesForNode(
           if (!IsGoogleCudaEnabled() &&
               absl::AsciiStrToLower(specified_device_name.type) == "gpu") {
             gpu_msg =
-                " [jurampark] The requested device appears to be a GPU, but CUDA is not "
+                " [jurampark2] The requested device appears to be a GPU, but CUDA is not "
                 "enabled.";
+#ifndef GOOGLE_CUDA
+            gpu_msg += " GOOGLE_CUDA is not defined.";
+#endif
+#ifdef GOOGLE_CUDA
+            gpu_msg += " GOOGLE_CUDA is defined.";
+#endif
 #if GOOGLE_CUDA
-            gpu_msg += " GOOGLE_CUDE also defined.";
-#else
-            gpu_msg += " GOOGLE_CUDE is not defined.";
+            gpu_msge += "GOOGLE_CUDA is define and true.";
 #endif
           }
 
